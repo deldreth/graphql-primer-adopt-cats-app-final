@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, Fragment } from 'react';
 
 import { Query } from 'react-apollo';
 import styled from 'react-emotion';
@@ -24,20 +24,25 @@ function Location(props) {
 
             <AddCat locationId={props.match.params.id} />
 
-            <hr />
-            <h2>Cats at this location</h2>
+            {data.location.cats &&
+              data.location.cats.length > 0 && (
+                <Fragment>
+                  <hr />
+                  <h2>Cats at this location</h2>
 
-            <Cats>
-              {data.location.cats.map((cat, index) => {
-                return (
-                  <Cat key={index}>
-                    <h5>{cat.name}</h5>
+                  <Cats>
+                    {data.location.cats.map((cat, index) => {
+                      return (
+                        <Cat key={index}>
+                          <h5>{cat.name}</h5>
 
-                    <p>{cat.breed}</p>
-                  </Cat>
-                );
-              })}
-            </Cats>
+                          <p>{cat.breed}</p>
+                        </Cat>
+                      );
+                    })}
+                  </Cats>
+                </Fragment>
+              )}
           </Container>
         );
       }}
@@ -56,7 +61,15 @@ const Cats = styled('div')`
   display: grid;
   grid-gap: 1em;
 
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(1, 1fr);
+
+  @media (min-width: 400px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 750px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 `;
 
 const Cat = styled('div')`
