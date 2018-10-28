@@ -3,10 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "3.3.2",
     "apollo-boost": "0.1.18",
-    "emotion": "9.2.12",
-    "graphql": "14.0.2",
     "graphql-tag": "2.10.0",
     "prop-types": "15.6.2",
     "react": "^16.6.0",
@@ -34,6 +31,8 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "emotion": "9.2.12",
+    "graphql": "^14.0.2",
     "husky": "1.1.2",
     "prettier": "1.14.3",
     "pretty-quick": "1.8.0"

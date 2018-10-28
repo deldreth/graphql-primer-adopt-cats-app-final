@@ -1,20 +1,17 @@
 import React, { memo } from 'react';
 
 import { Query } from 'react-apollo';
-
-import Paper from '@material-ui/core/Paper';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import MenuItem from '@material-ui/core/MenuItem';
+import styled from 'react-emotion';
+import { Link } from 'react-router-dom';
 
 import { LOCATIONS_QUERY } from '../graphql/queries';
-
-import { Link } from 'react-router-dom';
+import AddLocation from './AddLocation';
 
 function Locations(props) {
   return (
-    <Paper>
+    <Container>
+      <AddLocation />
+
       <Query query={LOCATIONS_QUERY}>
         {({ loading, error, data }) => {
           if (loading) {
@@ -25,25 +22,23 @@ function Locations(props) {
             return <p>Error!</p>;
           }
 
-          return (
-            <List>
-              {data.getLocations.map(location => {
-                return (
-                  <ListItemLink to={`/location/${location.id}`}>
-                    <ListItemText primary={location.name} />
-                  </ListItemLink>
-                );
-              })}
-            </List>
-          );
+          return data.getLocations.map((location, index) => {
+            return (
+              <h5>
+                <Link to={`/location/${location.id}`} key={index}>
+                  {location.name}
+                </Link>
+              </h5>
+            );
+          });
         }}
       </Query>
-    </Paper>
+    </Container>
   );
 }
 
-function ListItemLink(props) {
-  return <MenuItem button component={Link} {...props} />;
-}
-
 export default memo(Locations);
+
+const Container = styled('div')`
+  margin: 1em;
+`;
