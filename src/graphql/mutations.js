@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const ADD_CAT_MUTATION = gql`
-  mutation addCat($locationId: ID!, $input: CatInput) {
+  mutation addCat($locationId: ID!, $input: CatCreateInput) {
     addCat(locationId: $locationId, input: $input) {
       id
       name
@@ -13,7 +13,7 @@ export const ADD_CAT_MUTATION = gql`
 `;
 
 export const ADD_LOCATION_MUTATION = gql`
-  mutation addLocation($input: LocationInput) {
+  mutation addLocation($input: LocationCreateInput) {
     addLocation(input: $input) {
       id
       name

@@ -24,10 +24,8 @@ function Locations(props) {
 
           return data.getLocations.map((location, index) => {
             return (
-              <h5>
-                <Link to={`/location/${location.id}`} key={index}>
-                  {location.name}
-                </Link>
+              <h5 key={index}>
+                <Link to={`/location/${location.id}`}>{location.name}</Link>
               </h5>
             );
           });
